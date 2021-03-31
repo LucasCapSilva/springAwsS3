@@ -1,0 +1,5 @@
+s3ninja:
+  image: kcomlabs/s3ninja
+  ports:
+    - "9444:9444"
+
