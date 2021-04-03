@@ -13,7 +13,6 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.S3ClientOptions;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
@@ -45,7 +44,7 @@ public class S3Service {
     
    
 
-    public S3ObjectInputStream execute(String path) throws IOException {
+    public S3ObjectInputStream download(String path) throws IOException {
 
         AWSCredentials credentials = new BasicAWSCredentials(
                 accessKey,
@@ -71,11 +70,26 @@ public class S3Service {
         AmazonS3Client newClient = new AmazonS3Client(credentials,
                 new ClientConfiguration().withSignerOverride("S3SignerType"));
         File file = convertMultiPartToFile(multipartFile);
+        String fileName = System.currentTimeMillis() + "_" + file.getName();
         newClient.setS3ClientOptions(S3ClientOptions.builder().setPathStyleAccess(true).build());
+        
         newClient.setEndpoint(s3Host);
 
-        newClient.putObject(new PutObjectRequest(s3Bucket, "file", file)
-                .withCannedAcl(CannedAccessControlList.PublicRead));
+        newClient.putObject(new PutObjectRequest(s3Bucket, fileName, file));
+        file.delete();
+    }
+    
+    public String deleteFile(String fileName) {
+    	 AWSCredentials credentials = new BasicAWSCredentials(
+  	            accessKey,
+  	            secretKey
+  	    );
+         AmazonS3Client newClient = new AmazonS3Client(credentials,
+                 new ClientConfiguration().withSignerOverride("S3SignerType"));
+         newClient.setS3ClientOptions(S3ClientOptions.builder().setPathStyleAccess(true).build());
+         newClient.setEndpoint(s3Host);
+    	newClient.deleteObject(s3Bucket, fileName);
+        return fileName + " removed ...";
     }
 
 }
