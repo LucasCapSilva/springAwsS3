@@ -36,26 +36,26 @@ http://localhost:8081/s3/upload
 
 ### delete
 
-http://localhost:8081/s3/delete/{nome do arquivo}
+http://localhost:8081/s3/delete/{nomeDoarquivo}
 
 ### Downloads
 
 #### Download imagem
 
-http://localhost:8081/s3/downloadJPG/{nome do arquivo}
+http://localhost:8081/s3/downloadJPG/{nomeDoarquivo}
 
 #### Download pdf
 
-http://localhost:8081/s3/downloadPDF/{nome do arquivo}
+http://localhost:8081/s3/downloadPDF/{nomeDoarquivo}
 
 
 #### Download mp3
 
-http://localhost:8081/s3/downloadMP3/{nome do arquivo}
+http://localhost:8081/s3/downloadMP3/{nomeDoarquivo}
 
 #### Download mp4
 
-http://localhost:8081/s3/video/{nome do arquivo}
+http://localhost:8081/s3/video/{{nomeDoarquivo}
 
 
 
