@@ -55,7 +55,7 @@ http://localhost:8081/s3/downloadMP3/{nomeDoarquivo}
 
 #### Download mp4
 
-http://localhost:8081/s3/video/{{nomeDoarquivo}
+http://localhost:8081/s3/video/{nomeDoarquivo}
 
 
 
